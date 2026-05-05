@@ -48,10 +48,18 @@ export async function POST(req: NextRequest) {
         File: tempFilePath
       }, originalExtension);
 
-      const responseData = result.response as { Files: Array<{ FileData: string }> };
+      const responseData = result.response as { Files: Array<{ FileData?: string, Url?: string }> };
       const fileInfo = responseData.Files[0];
       
-      convertedBuffer = Buffer.from(fileInfo.FileData, 'base64');
+      if (fileInfo.FileData) {
+        convertedBuffer = Buffer.from(fileInfo.FileData, 'base64');
+      } else if (fileInfo.Url) {
+        const fetchedFile = await fetch(fileInfo.Url);
+        const fetchedBuffer = await fetchedFile.arrayBuffer();
+        convertedBuffer = Buffer.from(fetchedBuffer);
+      } else {
+        throw new Error("Invalid response from ConvertAPI");
+      }
       
       mimeType = format === "pdf" ? "application/pdf" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
     } else {
