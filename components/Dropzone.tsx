@@ -54,10 +54,10 @@ export default function Dropzone() {
       document.body.appendChild(a);
       a.click();
       a.remove();
-      window.URL.revokeObjectURL(url); 
+      window.URL.revokeObjectURL(url);
       
     } catch (error) {
-      alert("Error converting file! Make sure you are uploading a valid image format (jpg/png/webp) for now.");
+      alert("Error converting file!");
       console.error(error);
     } finally {
       setIsConverting(false);
@@ -87,7 +87,7 @@ export default function Dropzone() {
               : "Drag & drop a file here, or click to select"}
           </p>
           <p className="text-sm text-gray-500 mt-2 text-center">
-            Supports Images (PDFs and Documents coming soon)
+            Supports Images, PDFs, and Word Documents
           </p>
         </div>
       ) : (
@@ -127,7 +127,8 @@ export default function Dropzone() {
                 <option value="webp">WebP (Image)</option>
                 <option value="jpg">JPG (Image)</option>
                 <option value="png">PNG (Image)</option>
-                <option value="pdf" disabled>PDF (Coming soon)</option>
+                <option value="pdf">PDF (Document)</option>
+                <option value="docx">Word / DOCX (Document)</option>
               </select>
             </div>
             <button 
