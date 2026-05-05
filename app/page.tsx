@@ -4,8 +4,7 @@ import Dropzone from "../components/Dropzone";
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center space-y-8 w-full">
-      
-      {/* Header Section */}
+    
       <div className="text-center space-y-4">
         <div className="inline-flex items-center justify-center p-3 bg-blue-100 rounded-full mb-2">
           <ArrowRightLeft className="w-8 h-8 text-blue-600" />
@@ -17,10 +16,7 @@ export default function Home() {
           Secure, fast, and local file conversion. Transform images, documents, and more directly from your browser. 
         </p>
       </div>
-
-      {/* The Interactive Dropzone Component */}
       <Dropzone />
-
     </div>
   );
 }
